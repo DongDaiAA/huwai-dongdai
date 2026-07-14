@@ -1,2 +1,0 @@
-# huwai-dongdai
-huwainanzhuang
