@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026AW 7-8月毛织 KNITWEAR 视觉分析报告</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: #f5f5f7;
+    color: #1d1d1f;
+    line-height: 1.7;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 20px 60px; }
+
+  /* 封面 */
+  .cover {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 70%, #533483 100%);
+    border-radius: 0 0 24px 24px;
+    padding: 80px 40px 60px;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -50%; right: -20%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .cover .season { font-size: 14px; letter-spacing: 6px; opacity: 0.7; text-transform: uppercase; margin-bottom: 16px; }
+  .cover h1 { font-size: 42px; font-weight: 800; margin-bottom: 8px; letter-spacing: 2px; }
+  .cover .subtitle { font-size: 20px; opacity: 0.85; font-weight: 300; }
+  .cover .meta { margin-top: 28px; display: inline-flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+  .cover .meta span {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-size: 13px;
+    backdrop-filter: blur(10px);
+  }
+
+  /* 导航 */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid #e2e2e7;
+    padding: 14px 0;
+  }
+  .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 20px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .nav a {
+    font-size: 13px; color: #6e6e73; text-decoration: none;
+    padding: 6px 14px; border-radius: 16px; transition: all 0.2s;
+  }
+  .nav a:hover { background: #1a1a2e; color: #fff; }
+  .nav a.active { background: #1a1a2e; color: #fff; }
+
+  /* 章节大标题 */
+  .chapter-header {
+    margin: 56px 0 28px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .chapter-num {
+    flex-shrink: 0;
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 800; color: #fff;
+  }
+  .chapter-info h2 { font-size: 26px; font-weight: 700; color: #1a1a2e; }
+  .chapter-info p { font-size: 14px; color: #86868b; margin-top: 2px; }
+  .ch1 .chapter-num { background: linear-gradient(135deg, #667eea, #764ba2); }
+  .ch2 .chapter-num { background: linear-gradient(135deg, #f093fb, #f5576c); }
+  .ch3 .chapter-num { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+  .ch4 .chapter-num { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+
+  /* 区域标题 */
+  .region-title {
+    font-size: 18px; font-weight: 700; color: #1a1a2e;
+    margin: 32px 0 16px; padding-left: 14px;
+    border-left: 4px solid #667eea;
+  }
+  .ch2 .region-title { border-color: #f5576c; }
+  .ch3 .region-title { border-color: #4facfe; }
+  .ch4 .region-title { border-color: #43e97b; }
+
+  /* 子区域标题 */
+  .sub-region-title {
+    font-size: 15px; font-weight: 600; color: #6e6e73;
+    margin: 20px 0 12px; text-transform: uppercase; letter-spacing: 1px;
+  }
+
+  /* 卡片网格 */
+  .grid { display: grid; gap: 16px; }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+  /* 风格卡片 */
+  .style-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    border: 1px solid #f0f0f3;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .style-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.08); transform: translateY(-2px); }
+  .style-card .card-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 600;
+    padding: 3px 10px; border-radius: 10px;
+    margin-bottom: 12px; letter-spacing: 0.5px;
+  }
+  .style-card h4 { font-size: 17px; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; }
+  .style-card p { font-size: 13px; color: #86868b; }
+
+  /* 标签颜色 */
+  .tag-purple { background: #f0eaff; color: #7c3aed; }
+  .tag-pink { background: #ffeaf4; color: #db2777; }
+  .tag-blue { background: #e6f3ff; color: #2563eb; }
+  .tag-green { background: #e6fff4; color: #059669; }
+  .tag-orange { background: #fff4e6; color: #ea580c; }
+  .tag-teal { background: #e6fffa; color: #0d9488; }
+  .tag-indigo { background: #eef2ff; color: #4f46e5; }
+  .tag-rose { background: #fff1f2; color: #e11d48; }
+
+  /* 品类卡片 */
+  .category-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    border: 1px solid #f0f0f3;
+    transition: all 0.3s;
+  }
+  .category-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.08); transform: translateY(-2px); }
+  .category-card .cat-header {
+    padding: 18px 22px 14px;
+    border-bottom: 1px solid #f5f5f7;
+  }
+  .category-card .cat-header h4 { font-size: 16px; font-weight: 700; color: #1a1a2e; }
+  .category-card .cat-body { padding: 16px 22px; }
+  .category-card .cat-body .sub-style {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 0;
+    border-bottom: 1px dashed #f0f0f3;
+    font-size: 14px; color: #424245;
+  }
+  .category-card .cat-body .sub-style:last-child { border-bottom: none; }
+  .category-card .cat-body .sub-style .dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+
+  /* 趋势卡片 */
+  .trend-card {
+    background: linear-gradient(135deg, #fff 0%, #faf8ff 100%);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    border: 1px solid #f0f0f3;
+    text-align: center;
+  }
+  .trend-card .trend-icon { font-size: 36px; margin-bottom: 12px; }
+  .trend-card h4 { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; }
+  .trend-card p { font-size: 13px; color: #86868b; }
+
+  /* 图片占位 */
+  .img-placeholder {
+    background: linear-gradient(135deg, #e8ecf4 0%, #dde2ed 100%);
+    border-radius: 12px;
+    height: 140px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #aeaeb5;
+    margin-bottom: 12px;
+  }
+
+  /* 章节分割线 */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #e2e2e7, transparent);
+    margin: 48px 0;
+  }
+
+  /* 统计条 */
+  .stat-bar {
+    display: flex; gap: 12px; flex-wrap: wrap; margin: 20px 0;
+  }
+  .stat-item {
+    flex: 1; min-width: 140px;
+    background: #fff; border-radius: 12px; padding: 16px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    border: 1px solid #f0f0f3;
+    text-align: center;
+  }
+  .stat-item .stat-num { font-size: 28px; font-weight: 800; color: #1a1a2e; }
+  .stat-item .stat-label { font-size: 12px; color: #86868b; margin-top: 4px; }
+
+  /* 小节标注 */
+  .anno {
+    font-size: 13px; color: #86868b;
+    padding: 10px 16px;
+    background: #f5f5f7; border-radius: 10px;
+    margin: 16px 0;
+  }
+  .anno strong { color: #424245; }
+
+  @media (max-width: 768px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .cover { padding: 50px 20px 40px; }
+    .cover h1 { font-size: 28px; }
+    .chapter-header { margin: 40px 0 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 封面 -->
+<div class="cover">
+  <div class="season">2026 Autumn / Winter</div>
+  <h1>毛织 KNITWEAR</h1>
+  <div class="subtitle">7-8月 视觉分析报告</div>
+  <div class="meta">
+    <span>📅 2026AW</span>
+    <span>🧶 毛织品类</span>
+    <span>📊 52页完整分析</span>
+  </div>
+</div>
+
+<!-- 导航 -->
+<div class="nav">
+  <div class="nav-inner">
+    <a href="#ch1">视觉分析</a>
+    <a href="#ch2">社媒热度</a>
+    <a href="#ch3">站内热销画像</a>
+    <a href="#ch4">竞对上新重点</a>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ===== 第一章：视觉分析 ===== -->
+<div id="ch1"></div>
+<div class="chapter-header ch1">
+  <div class="chapter-num">01</div>
+  <div class="chapter-info">
+    <h2>视觉分析</h2>
+    <p>站内热销视觉风格 · 商务风 · 站外补充视觉 · 黑人视觉</p>
+  </div>
+</div>
+
+<div class="stat-bar">
+  <div class="stat-item"><div class="stat-num">8+</div><div class="stat-label">热销拍摄风格</div></div>
+  <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">站外补充方向</div></div>
+  <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">商务风专题</div></div>
+  <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">黑人视觉专题</div></div>
+</div>
+
+<!-- 1.1 热销视觉 -->
+<div class="region-title">热销视觉 — 站内高转化拍摄风格</div>
+
+<div class="sub-region-title">📷 模特拍摄角度</div>
+<div class="grid grid-3">
+  <div class="style-card">
+    <div class="img-placeholder">📸 正面站姿中景</div>
+    <span class="card-tag tag-purple">站姿 · 正面</span>
+    <h4>正面站姿中景</h4>
+    <p>最基础高转化拍摄角度，清晰展示商品全貌与版型</p>
+  </div>
+  <div class="style-card">
+    <div class="img-placeholder">📸 侧面站姿中景</div>
+    <span class="card-tag tag-indigo">站姿 · 侧面</span>
+    <h4>侧面站姿中景 · 老钱风</h4>
+    <p>侧面角度凸显质感，搭配老钱风造型，高级感拉满</p>
+  </div>
+  <div class="style-card">
+    <div class="img-placeholder">📸 高机位俯拍</div>
+    <span class="card-tag tag-blue">高机位</span>
+    <h4>高机位俯拍</h4>
+    <p>俯拍视角营造氛围感，适合休闲慵懒风格展示</p>
+  </div>
+</div>
+
+<div class="sub-region-title">🪑 姿态与场景</div>
+<div class="grid grid-3">
+  <div class="style-card">
+    <div class="img-placeholder">🪑 坐姿拍摄</div>
+    <span class="card-tag tag-teal">坐姿</span>
+    <h4>坐姿拍摄</h4>
+    <p>坐姿更自然放松，拉近与买家距离，适合日常穿搭</p>
+  </div>
+  <div class="style-card">
+    <div class="img-placeholder">🏙️ 街头感视觉</div>
+    <span class="card-tag tag-orange">街头</span>
+    <h4>街头感视觉</h4>
+    <p>街头场景拍摄，潮流感强，适合年轻潮流款式</p>
+  </div>
+  <div class="style-card">
+    <div class="img-placeholder">🏔️ 度假场景</div>
+    <span class="card-tag tag-green">度假</span>
+    <h4>度假：山/海等</h4>
+    <p>山野、海边等度假场景，自然光线下呈现松弛感</p>
+  </div>
+</div>
+
+<div class="sub-region-title">📦 摆拍与细节</div>
+<div class="grid grid-3">
+  <div class="style-card">
+    <div class="img-placeholder">🎁 礼盒装摆拍</div>
+    <span class="card-tag tag-pink">摆拍 · 礼盒</span>
+    <h4>礼盒装摆拍</h4>
+    <p>礼盒包装摆拍，提升礼品属性，适合节日季促销</p>
+  </div>
+  <div class="style-card">
+    <div class="img-placeholder">🔬 细节展示</div>
+    <span class="card-tag tag-rose">细节</span>
+    <h4>细节展示：高品质面料</h4>
+    <p>面料纹理特写，强调品质感与工艺细节</p>
+  </div>
+  <div class="style-card">
+    <div class="img-placeholder">👔 挂拍</div>
+    <span class="card-tag tag-purple">挂拍</span>
+    <h4>挂拍</h4>
+    <p>衣架挂拍，干净利落展示商品原貌，信息传递直接</p>
+  </div>
+</div>
+
+<div class="anno"><strong>摆拍备注：</strong>年轻潮流款式适合使用摆拍方式呈现，更具视觉冲击力。</div>
+
+<!-- 1.2 商务风视觉 -->
+<div class="region-title">商务风视觉</div>
+<div class="grid grid-2">
+  <div class="style-card">
+    <div class="img-placeholder">💼 商务风场景</div>
+    <span class="card-tag tag-indigo">商务 · 专题</span>
+    <h4>商务风视觉专题</h4>
+    <p>独立的商务风格视觉呈现，区别于日常休闲风，突出毛织单品在商务通勤场景下的穿搭适配性。适合职场男性消费者群体。</p>
+  </div>
+  <div class="style-card">
+    <div class="img-placeholder">👔 商务搭配</div>
+    <span class="card-tag tag-blue">商务 · 搭配</span>
+    <h4>商务场景穿搭示范</h4>
+    <p>毛织针织衫在商务场景中的搭配方案，展示与西裤、衬衫等单品的组合效果，强化"可通勤"的产品定位。</p>
+  </div>
+</div>
+
+<!-- 1.3 站外热销视觉补充 -->
+<div class="region-title">补充 — 站外热销视觉</div>
+<div class="anno"><strong>核心洞察：</strong>对比站外，可以补充<strong>露脸模特</strong>的视觉。站内目前露脸比例不足，站外热销商品普遍采用露脸拍摄。</div>
+
+<div class="sub-region-title">👤 露脸模特方向</div>
+<div class="grid grid-3">
+  <div class="style-card">
+    <div class="img-placeholder">🎩 露脸老钱风</div>
+    <span class="card-tag tag-purple">露脸 · 老钱</span>
+    <h4>露脸老钱风</h4>
+    <p>站外高转化风格，露脸+老钱风穿搭，气质感拉满</p>
+  </div>
+  <div class="style-card">
+    <div class="img-placeholder">🏷️ 品牌感视觉</div>
+    <span class="card-tag tag-indigo">品牌感</span>
+    <h4>品牌感视觉</h4>
+    <p>具有品牌调性的视觉呈现，提升商品溢价感知</p>
+  </div>
+  <div class="style-card">
+    <div class="img-placeholder">🧔 成熟露脸</div>
+    <span class="card-tag tag-blue">成熟 · 露脸</span>
+    <h4>成熟露脸</h4>
+    <p>成熟男性模特露脸拍摄，匹配目标客群画像</p>
+  </div>
+</div>
+
+<div class="sub-region-title">🌊 氛围与自拍感</div>
+<div class="grid grid-2">
+  <div class="style-card">
+    <div class="img-placeholder">🏖️ 度假chill感</div>
+    <span class="card-tag tag-green">度假 · chill</span>
+    <h4>度假，chill感</h4>
+    <p>度假场景下的松弛感拍摄，传递生活方式而非单纯卖货</p>
+  </div>
+  <div class="style-card">
+    <div class="img-placeholder">🤳 自拍感</div>
+    <span class="card-tag tag-orange">自拍感</span>
+    <h4>自拍感</h4>
+    <p>自拍视角拉近与买家距离，真实感强，降低商业感</p>
+  </div>
+</div>
+
+<!-- 1.4 黑人视觉 -->
+<div class="region-title">黑人视觉</div>
+<div class="style-card" style="max-width:500px;">
+  <div class="img-placeholder" style="height:180px;">🏿 黑人模特视觉</div>
+  <span class="card-tag tag-rose">专题 · 多元化</span>
+  <h4>黑人模特视觉专题</h4>
+  <p>针对多元化市场的视觉补充，使用黑人模特展示毛织单品，覆盖更广泛的消费者群体，提升不同肤色人群的购买转化。</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== 第二章：社媒热度 ===== -->
+<div id="ch2"></div>
+<div class="chapter-header ch2">
+  <div class="chapter-num">02</div>
+  <div class="chapter-info">
+    <h2>社媒热度</h2>
+    <p>Pinterest 趋势方向 · Instagram 高赞内容</p>
+  </div>
+</div>
+
+<!-- 2.1 Pinterest -->
+<div class="region-title">Pinterest 趋势 — 毛织作为造型层次工具</div>
+<p style="font-size:15px; color:#424245; margin-bottom:20px;">Pinterest 平台数据显示，毛织品类的核心趋势围绕<strong>"造型层次工具"</strong>定位展开，以下为四大热门方向：</p>
+
+<div class="grid grid-4">
+  <div class="trend-card">
+    <div class="trend-icon">🎨</div>
+    <h4>高饱和色彩</h4>
+    <p>鲜艳饱和色系毛织品成为吸睛利器</p>
+  </div>
+  <div class="trend-card">
+    <div class="trend-icon">🎓</div>
+    <h4>学院感图案凸出</h4>
+    <p>学院风图案设计，复古青春感</p>
+  </div>
+  <div class="trend-card">
+    <div class="trend-icon">💰</div>
+    <h4>Old Money 风格凸出</h4>
+    <p>老钱风持续走热，低调奢华感</p>
+  </div>
+  <div class="trend-card">
+    <div class="trend-icon">⚽</div>
+    <h4>运动针织</h4>
+    <p>运动针织跨界融合，功能与时尚并存</p>
+  </div>
+</div>
+
+<!-- 2.2 INS高赞 -->
+<div class="region-title">Instagram 高赞内容</div>
+<div class="grid grid-2">
+  <div class="style-card">
+    <div class="img-placeholder" style="height:200px;">📸 INS高赞内容合集一</div>
+    <span class="card-tag tag-pink">INS · 高赞</span>
+    <h4>INS高赞 — 第一组</h4>
+    <p>Instagram 平台高互动量毛织穿搭内容，反映真实用户偏好与传播热度</p>
+  </div>
+  <div class="style-card">
+    <div class="img-placeholder" style="height:200px;">📸 INS高赞内容合集二</div>
+    <span class="card-tag tag-pink">INS · 高赞</span>
+    <h4>INS高赞 — 第二组</h4>
+    <p>第二组高赞内容，补充更多风格参考，覆盖不同穿搭场景</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== 第三章：站内近期热销画像 ===== -->
+<div id="ch3"></div>
+<div class="chapter-header ch3">
+  <div class="chapter-num">03</div>
+  <div class="chapter-info">
+    <h2>站内近期热销画像</h2>
+    <p>按品类 × 风格维度精细化拆解站内热销商品</p>
+  </div>
+</div>
+
+<div class="stat-bar">
+  <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">核心品类</div></div>
+  <div class="stat-item"><div class="stat-num">11</div><div class="stat-label">细分风格</div></div>
+  <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">POLO子风格</div></div>
+  <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">套头子风格</div></div>
+</div>
+
+<!-- 3.1 背心针织 & 半开襟针织 & 开衫 -->
+<div class="region-title">基础品类</div>
+<div class="grid grid-3">
+  <div class="category-card">
+    <div class="cat-header"><h4>🎽 背心针织</h4></div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#4facfe;"></span>背心款式针织单品</div>
+      <div class="sub-style"><span class="dot" style="background:#4facfe;"></span>适合叠穿造型层次</div>
+    </div>
+  </div>
+  <div class="category-card">
+    <div class="cat-header"><h4>🧥 半开襟针织</h4></div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#43e97b;"></span>半开襟设计针织</div>
+      <div class="sub-style"><span class="dot" style="background:#43e97b;"></span>休闲与正式兼顾</div>
+    </div>
+  </div>
+  <div class="category-card">
+    <div class="cat-header"><h4>� CARDIGAN 开衫</h4></div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#667eea;"></span>开衫品类（2组热销）</div>
+      <div class="sub-style"><span class="dot" style="background:#667eea;"></span>多场景适配单品</div>
+    </div>
+  </div>
+</div>
+
+<!-- 3.2 POLO针织 -->
+<div class="region-title">POLO 针织 — 4大细分风格</div>
+<div class="grid grid-4">
+  <div class="category-card">
+    <div class="cat-header">
+      <span class="card-tag tag-blue" style="margin-bottom:8px;">简约基础</span>
+      <h4>简约基础</h4>
+    </div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#2563eb;"></span>纯色基础款POLO针织</div>
+      <div class="sub-style"><span class="dot" style="background:#2563eb;"></span>百搭不挑人</div>
+    </div>
+  </div>
+  <div class="category-card">
+    <div class="cat-header">
+      <span class="card-tag tag-purple" style="margin-bottom:8px;">肌理感</span>
+      <h4>绞花与特殊肌理</h4>
+    </div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#7c3aed;"></span>绞花编织纹理</div>
+      <div class="sub-style"><span class="dot" style="background:#7c3aed;"></span>特殊肌理面料</div>
+    </div>
+  </div>
+  <div class="category-card">
+    <div class="cat-header">
+      <span class="card-tag tag-orange" style="margin-bottom:8px;">间色</span>
+      <h4>条纹间色</h4>
+    </div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#ea580c;"></span>条纹间色设计</div>
+      <div class="sub-style"><span class="dot" style="background:#ea580c;"></span>学院感配色方案</div>
+    </div>
+  </div>
+  <div class="category-card">
+    <div class="cat-header">
+      <span class="card-tag tag-teal" style="margin-bottom:8px;">镂空</span>
+      <h4>网孔、针织镂空</h4>
+    </div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#0d9488;"></span>网孔透气设计</div>
+      <div class="sub-style"><span class="dot" style="background:#0d9488;"></span>针织镂空工艺</div>
+    </div>
+  </div>
+</div>
+
+<!-- 3.3 套头针织 -->
+<div class="region-title">套头针织 — 3大细分风格</div>
+<div class="grid grid-3">
+  <div class="category-card">
+    <div class="cat-header">
+      <span class="card-tag tag-blue" style="margin-bottom:8px;">基础</span>
+      <h4>基础套头</h4>
+    </div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#2563eb;"></span>基础纯色套头针织</div>
+      <div class="sub-style"><span class="dot" style="background:#2563eb;"></span>日常百搭单品</div>
+    </div>
+  </div>
+  <div class="category-card">
+    <div class="cat-header">
+      <span class="card-tag tag-teal" style="margin-bottom:8px;">镂空</span>
+      <h4>网孔、针织镂空</h4>
+    </div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#0d9488;"></span>网孔镂空套头款</div>
+      <div class="sub-style"><span class="dot" style="background:#0d9488;"></span>透气肌理感</div>
+    </div>
+  </div>
+  <div class="category-card">
+    <div class="cat-header">
+      <span class="card-tag tag-orange" style="margin-bottom:8px;">复合图案</span>
+      <h4>做旧/提花/条纹间色</h4>
+    </div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#ea580c;"></span>做旧工艺处理</div>
+      <div class="sub-style"><span class="dot" style="background:#ea580c;"></span>提花图案设计</div>
+      <div class="sub-style"><span class="dot" style="background:#ea580c;"></span>条纹间色搭配</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== 第四章：竞对上新重点 ===== -->
+<div id="ch4"></div>
+<div class="chapter-header ch4">
+  <div class="chapter-num">04</div>
+  <div class="chapter-info">
+    <h2>竞对上新重点</h2>
+    <p>按品类 × 面料/工艺维度拆解竞对上新方向</p>
+  </div>
+</div>
+
+<div class="stat-bar">
+  <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">竞对品类</div></div>
+  <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">马甲/背心组</div></div>
+  <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">POLO子方向</div></div>
+  <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">开衫组</div></div>
+  <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">套头子方向</div></div>
+</div>
+
+<!-- 4.1 马甲/背心类 -->
+<div class="region-title">马甲 / 背心类</div>
+<div class="grid grid-4">
+  <div class="style-card">
+    <div class="img-placeholder">马甲/背心 组1</div>
+    <span class="card-tag tag-green">马甲 · 组1</span>
+    <h4>马甲/背心类 A</h4>
+    <p>竞对马甲背心方向第一组上新</p>
+  </div>
+  <div class="style-card">
+    <div class="img-placeholder">马甲/背心 组2</div>
+    <span class="card-tag tag-green">马甲 · 组2</span>
+    <h4>马甲/背心类 B</h4>
+    <p>竞对马甲背心方向第二组上新</p>
+  </div>
+  <div class="style-card">
+    <div class="img-placeholder">马甲/背心 组3</div>
+    <span class="card-tag tag-green">马甲 · 组3</span>
+    <h4>马甲/背心类 C</h4>
+    <p>竞对马甲背心方向第三组上新</p>
+  </div>
+  <div class="style-card">
+    <div class="img-placeholder">马甲/背心 组4</div>
+    <span class="card-tag tag-green">马甲 · 组4</span>
+    <h4>马甲/背心类 D</h4>
+    <p>竞对马甲背心方向第四组上新</p>
+  </div>
+</div>
+
+<!-- 4.2 POLO针织 -->
+<div class="region-title">POLO 针织 — 竞对上新5大方向</div>
+<div class="grid grid-3">
+  <div class="category-card">
+    <div class="cat-header">
+      <span class="card-tag tag-purple" style="margin-bottom:8px;">肌理面料</span>
+      <h4>肌理面料 · 华夫格</h4>
+    </div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#7c3aed;"></span>华夫格肌理面料</div>
+      <div class="sub-style"><span class="dot" style="background:#7c3aed;"></span>A/B面双面设计</div>
+    </div>
+  </div>
+  <div class="category-card">
+    <div class="cat-header">
+      <span class="card-tag tag-blue" style="margin-bottom:8px;">基础+雪花</span>
+      <h4>基础POLO · 雪花针织</h4>
+    </div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#2563eb;"></span>基础纯色POLO</div>
+      <div class="sub-style"><span class="dot" style="background:#2563eb;"></span>雪花针织特殊肌理</div>
+    </div>
+  </div>
+  <div class="category-card">
+    <div class="cat-header">
+      <span class="card-tag tag-orange" style="margin-bottom:8px;">条纹间色</span>
+      <h4>条纹间色 POLO</h4>
+    </div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#ea580c;"></span>条纹间色设计</div>
+      <div class="sub-style"><span class="dot" style="background:#ea580c;"></span>多色组合方案</div>
+    </div>
+  </div>
+</div>
+<div class="grid grid-2" style="margin-top:16px;">
+  <div class="category-card">
+    <div class="cat-header">
+      <span class="card-tag tag-teal" style="margin-bottom:8px;">镂空+提花</span>
+      <h4>针织镂空 · 提花/线迹装饰</h4>
+    </div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#0d9488;"></span>针织镂空工艺</div>
+      <div class="sub-style"><span class="dot" style="background:#0d9488;"></span>提花图案装饰</div>
+      <div class="sub-style"><span class="dot" style="background:#0d9488;"></span>线迹装饰细节</div>
+    </div>
+  </div>
+  <div class="category-card">
+    <div class="cat-header">
+      <span class="card-tag tag-indigo" style="margin-bottom:8px;">POLO总览</span>
+      <h4>POLO 针织竞对总览</h4>
+    </div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#4f46e5;"></span>覆盖肌理/基础/间色/镂空/提花</div>
+      <div class="sub-style"><span class="dot" style="background:#4f46e5;"></span>5大上新方向全面布局</div>
+      <div class="sub-style"><span class="dot" style="background:#4f46e5;"></span>面料工艺创新为核心竞争点</div>
+    </div>
+  </div>
+</div>
+
+<!-- 4.3 毛织开衫类 -->
+<div class="region-title">毛织开衫类</div>
+<div class="grid grid-3">
+  <div class="style-card">
+    <div class="img-placeholder">开衫 组1</div>
+    <span class="card-tag tag-green">开衫 · 组1</span>
+    <h4>毛织开衫类 A</h4>
+    <p>竞对开衫方向第一组上新</p>
+  </div>
+  <div class="style-card">
+    <div class="img-placeholder">开衫 组2</div>
+    <span class="card-tag tag-green">开衫 · 组2</span>
+    <h4>毛织开衫类 B</h4>
+    <p>竞对开衫方向第二组上新</p>
+  </div>
+  <div class="style-card">
+    <div class="img-placeholder">开衫 组3</div>
+    <span class="card-tag tag-green">开衫 · 组3</span>
+    <h4>毛织开衫类 C</h4>
+    <p>竞对开衫方向第三组上新</p>
+  </div>
+</div>
+
+<!-- 4.4 半开襟针织 -->
+<div class="region-title">半开襟针织 — 竞对3大方向</div>
+<div class="grid grid-3">
+  <div class="category-card">
+    <div class="cat-header">
+      <span class="card-tag tag-blue" style="margin-bottom:8px;">面料创新</span>
+      <h4>亚麻混纺 · 宽松半开襟</h4>
+    </div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#2563eb;"></span>亚麻混纺面料</div>
+      <div class="sub-style"><span class="dot" style="background:#2563eb;"></span>宽松版型半开襟</div>
+    </div>
+  </div>
+  <div class="category-card">
+    <div class="cat-header">
+      <span class="card-tag tag-purple" style="margin-bottom:8px;">经典工艺</span>
+      <h4>绞花 · 条纹间色</h4>
+    </div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#7c3aed;"></span>绞花编织工艺</div>
+      <div class="sub-style"><span class="dot" style="background:#7c3aed;"></span>条纹间色设计</div>
+    </div>
+  </div>
+  <div class="category-card">
+    <div class="cat-header">
+      <span class="card-tag tag-orange" style="margin-bottom:8px;">拼接设计</span>
+      <h4>拼接 半开襟</h4>
+    </div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#ea580c;"></span>拼接设计工艺</div>
+      <div class="sub-style"><span class="dot" style="background:#ea580c;"></span>多材质/多色拼接</div>
+    </div>
+  </div>
+</div>
+
+<!-- 4.5 套头衫 -->
+<div class="region-title">套头衫 — 竞对7大上新方向</div>
+<div class="grid grid-4">
+  <div class="category-card">
+    <div class="cat-header">
+      <span class="card-tag tag-teal" style="margin-bottom:8px;">针钩织</span>
+      <h4>针钩织类 套头</h4>
+    </div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#0d9488;"></span>针钩织工艺</div>
+      <div class="sub-style"><span class="dot" style="background:#0d9488;"></span>手工质感</div>
+    </div>
+  </div>
+  <div class="category-card">
+    <div class="cat-header">
+      <span class="card-tag tag-rose" style="margin-bottom:8px;">做旧</span>
+      <h4>做旧 套头</h4>
+    </div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#e11d48;"></span>做旧工艺处理</div>
+      <div class="sub-style"><span class="dot" style="background:#e11d48;"></span>复古潮流感</div>
+    </div>
+  </div>
+  <div class="category-card">
+    <div class="cat-header">
+      <span class="card-tag tag-blue" style="margin-bottom:8px;">华夫格</span>
+      <h4>极简华夫格 套头</h4>
+    </div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#2563eb;"></span>极简设计</div>
+      <div class="sub-style"><span class="dot" style="background:#2563eb;"></span>华夫格肌理面料</div>
+    </div>
+  </div>
+  <div class="category-card">
+    <div class="cat-header">
+      <span class="card-tag tag-purple" style="margin-bottom:8px;">提花</span>
+      <h4>宽松套头 · 提花</h4>
+    </div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#7c3aed;"></span>宽松版型</div>
+      <div class="sub-style"><span class="dot" style="background:#7c3aed;"></span>提花图案设计</div>
+    </div>
+  </div>
+</div>
+<div class="grid grid-2" style="margin-top:16px;">
+  <div class="category-card">
+    <div class="cat-header">
+      <span class="card-tag tag-orange" style="margin-bottom:8px;">几何图案</span>
+      <h4>几何图案 套头</h4>
+    </div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#ea580c;"></span>几何图案设计</div>
+      <div class="sub-style"><span class="dot" style="background:#ea580c;"></span>现代感视觉</div>
+    </div>
+  </div>
+  <div class="category-card">
+    <div class="cat-header">
+      <span class="card-tag tag-pink" style="margin-bottom:8px;">刺绣花卉</span>
+      <h4>刺绣花卉 套头</h4>
+    </div>
+    <div class="cat-body">
+      <div class="sub-style"><span class="dot" style="background:#db2777;"></span>刺绣花卉工艺</div>
+      <div class="sub-style"><span class="dot" style="background:#db2777;"></span>精致细节装饰</div>
+    </div>
+  </div>
+</div>
+
+<!-- 总结 -->
+<div class="divider"></div>
+<div style="background:#fff; border-radius:16px; padding:32px; box-shadow:0 2px 12px rgba(0,0,0,0.04); border:1px solid #f0f0f3;">
+  <h3 style="font-size:20px; color:#1a1a2e; margin-bottom:16px;">📋 报告总结</h3>
+  <div class="grid grid-2" style="gap:20px;">
+    <div>
+      <h4 style="font-size:15px; color:#667eea; margin-bottom:8px;">视觉方向</h4>
+      <ul style="font-size:14px; color:#424245; padding-left:20px;">
+        <li>站内热销以<strong>站姿中景</strong>为核心，老钱风侧面角度高转化</li>
+        <li>需补充<strong>露脸模特</strong>视觉，对齐站外热销风格</li>
+        <li>商务风与黑人视觉为独立补充方向</li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="font-size:15px; color:#f5576c; margin-bottom:8px;">社媒趋势</h4>
+      <ul style="font-size:14px; color:#424245; padding-left:20px;">
+        <li>Pinterest：高饱和色彩 / 学院感 / Old Money / 运动针织</li>
+        <li>INS高赞内容反映真实用户穿搭偏好</li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="font-size:15px; color:#4facfe; margin-bottom:8px;">站内热销品类</h4>
+      <ul style="font-size:14px; color:#424245; padding-left:20px;">
+        <li>POLO针织4风格全覆盖（基础/绞花/间色/镂空）</li>
+        <li>套头针织3风格（基础/镂空/做旧提花间色）</li>
+        <li>背心、半开襟、开衫为基础热销品类</li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="font-size:15px; color:#43e97b; margin-bottom:8px;">竞对上新重点</h4>
+      <ul style="font-size:14px; color:#424245; padding-left:20px;">
+        <li>马甲/背心类大量上新（4组）</li>
+        <li>POLO聚焦<strong>华夫格/雪花/镂空/提花</strong>面料工艺创新</li>
+        <li>套头衫7大方向：针钩织/做旧/华夫格/提花/几何/刺绣</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center; padding:40px 0 20px; color:#aeaeb5; font-size:13px;">
+  <p>2026AW 7-8月毛织 KNITWEAR 视觉分析报告</p>
+</div>
+
+</div>
+</body>
+</html>
